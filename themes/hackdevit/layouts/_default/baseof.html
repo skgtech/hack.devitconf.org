@@ -7,5 +7,55 @@
         {{- block "main" . }}{{- end }}
         </div>
         {{- partial "footer.html" . -}}
+
+        <script>
+            function setupFaq() {
+                var faqItems = document.querySelectorAll('.faq-content-body-item');
+                var i = 0;
+                for (i = 0; i < faqItems.length; i++) {
+                    faqItems[i].addEventListener('click', function (ev) {
+                        var elem = ev.target;
+                        while (!elem.classList.contains('faq-content-body-item')) {
+                            elem = elem.parentElement;
+                        }
+                        elem.querySelector('.faq-content-body-item-answer').classList.toggle('show');
+                        elem.querySelector('.faq-content-body-item-question').classList.toggle('faq-content-body-item-question-active');
+                    });
+                }
+            }
+
+            setupFaq();
+        </script>
+        <script>
+            function setupSchedule() {
+                var tabElems = document.querySelectorAll('.schedule-header-tabs-item');
+                var i = 0;
+                for (i = 0; i < tabElems.length; i++) {
+                    tabElems[i].addEventListener('click', function (ev) {
+                        var tabElem = ev.target;
+                        var scheduleDay = tabElem.dataset.scheduleTrigger;
+
+                        // hide all tabs
+                        var allTabElems = document.querySelectorAll('.schedule-header-tabs-item');
+                        var j = 0;
+                        for (j = 0; j < allTabElems.length; j++) {
+                            allTabElems[j].classList.remove('active');
+                        }
+                        tabElem.classList.add('active'); // make current tab active
+
+                        // hide all schedule bodies
+                        var allBodyElems = document.querySelectorAll('[data-schedule-day]');
+                        var j = 0;
+                        for (j = 0; j < allBodyElems.length; j++) {
+                            allBodyElems[j].style.display = 'none';
+                        }
+                        var currentBodyElem = document.querySelector('[data-schedule-day=' + scheduleDay + ']');
+                        currentBodyElem.style.display = 'block'; // show current schedule body
+                    });
+                }
+            }
+
+            setupSchedule();
+        </script>
     </body>
 </html>
