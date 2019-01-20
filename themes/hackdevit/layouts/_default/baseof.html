@@ -8,7 +8,50 @@
         </div>
         {{- partial "footer.html" . -}}
 
+        <div class="modal" id="judging-modal">
+            <div class="modal-content">
+                <h2>The judging process</h2>
+                <div class="modal-content-subtitle">The judging process will be transparent and pseudonymous:</div>
+                <p>
+                    Each judge will have a fixed amount of points in their disposal. This amount will be the same one
+                    as the number of teams. They will be able to distribute those points at any number of teams they
+                    want. All points from all judges are summed up, and the winners get defined.
+                </p>
+                <p>
+                    After that, each judge will be appointed a random name (without revealing which random name belongs
+                    to which judge) and their voting points will be publicized.
+                </p>
+
+                <h2>Judging criteria</h2>
+                <p>
+                    <strong>Technology</strong>
+                    <br>This is a technology contest and we want to see how we can use it to make our lives better and of higher quality.
+                </p>
+                <p>
+                    <strong>Impact</strong>
+                    <br>The theme of this hackathon is on urban improvement, so the more positive impact a project has, the better.
+                </p>
+                <p>
+                    <strong>Ethos</strong>
+                    <br>It’s important for everything we make to study its consequences in the world, and those consequences have to be aligned with one’s ethics.
+                </p>
+                <p>
+                    <strong>Difficulty</strong>
+                    <br>Someone will be awarded more points if they make something difficult, but not at the expense of the ethos or impact.
+                </p>
+                <p>
+                    <strong>Business</strong>
+                    <br>The idea has to be economically viable, but we don’t care if it will make millions. The purpose is to make something useful, not commercially successful.
+                </p>
+                <p>
+                    <strong>Aesthetics</strong>
+                    <br>It’s not important to have a pretty or polished product. Functionality matters more in this contest.
+                </p>
+            </div>
+        </div>
+
         <script>
+            // setup auto show/hide navbar
             window.onscroll = function () {
                 scrollFunction()
             };
@@ -20,6 +63,24 @@
                     document.getElementById('js-navbar').style.top = '-400px';
                 }
             }
+        </script>
+        <script>
+            function setupJudgingProcessModal() {
+                var modalButton = document.getElementById('judging-modal-trigger');
+                modalButton.addEventListener('click', function () {
+                    modal.style.display = 'block';
+                });
+
+                // close modal on click outside the modal
+                var modal = document.getElementById('judging-modal');
+                window.onclick = function (ev) {
+                    if (ev.target == modal) {
+                        modal.style.display = 'none';
+                    }
+                }
+            }
+
+            setupJudgingProcessModal();
         </script>
         <script>
             function setupFaq() {
